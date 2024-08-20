@@ -12,10 +12,11 @@ export default function App() {
      <View>
        <Header />
        {/* <UserDashboard/> */}
+
        <Location/>
       </View>
    </Provider>
-  
+   
   );
 }
 
