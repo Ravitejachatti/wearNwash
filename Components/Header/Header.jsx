@@ -10,7 +10,7 @@ const Header = () => {
 
 
 const dispatch  = useDispatch()
-const store = useSelector(state=> state.appReducer.centers);
+const store = useSelector(state=> state.app.centers.length);
 console.log("store",store);
 
 useEffect(()=>{
