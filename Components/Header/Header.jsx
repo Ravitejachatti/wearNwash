@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View,Text,StyleSheet, TouchableOpacity, } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { theme } from '../../theme'
-// import { Button } from 'native-base'
+import { useDispatch, useSelector } from 'react-redux'
+import { getBasedOnLocation } from '../../Redux/App/action'
 
 
 const Header = () => {
+
+
+const dispatch  = useDispatch()
+const store = useSelector(state=> state.appReducer.centers);
+console.log("store",store);
+
+useEffect(()=>{
+  dispatch(getBasedOnLocation())
+  .then(res=>{
+    // console.log(res)
+  })
+},[])
+    
+
   return (
     <View >
         <View style={Styles.container}>
@@ -14,14 +29,7 @@ const Header = () => {
        
         </View>
 
-        {/* <Button> hare krishna</Button> */}
-
-
-        
-        
-        
-        
-      
+        {/* <Button> hare krishna</Button> */}    
     </View>
   )
 }
