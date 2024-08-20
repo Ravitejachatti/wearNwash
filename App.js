@@ -1,30 +1,30 @@
+// App.js
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './Redux/store';  // Adjust the path as needed
+import Header from './Components/Header/Header';
+import UserDashboard from './Screens/UserDashboard';
+import Location from './Screens/Location';
+import { StyleSheet, View } from 'react-native';
 
-import { StyleSheet, Text, View } from "react-native";
-import Header from "./Components/Header/Header";
-import UserDashboard from "./Screens/UserDashboard";
-import Location from "./Screens/Location";
-// import { NativeBaseProvider } from "native-base";
-import { Provider } from "react-redux";
-import { store } from "./Redux/store";
 export default function App() {
   return (
-   <Provider store={store}>
-     <View>
-       <Header />
-       {/* <UserDashboard/> */}
-
-       <Location/>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <Header />
+        {/* Uncomment these as needed */}
+        {/* <UserDashboard /> */}
+        {/* <Location /> */}
       </View>
-   </Provider>
-   
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // flex: 1,
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
