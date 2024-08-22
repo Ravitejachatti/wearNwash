@@ -1,8 +1,6 @@
 import React from 'react'
-import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import UserDashboard from '../Screens/UserDashboard'
 import AboutUs from '../Screens/AboutUs'
 import Combos from '../Screens/Combos'
 import ContactUs from '../Screens/ContactUs'
@@ -12,22 +10,25 @@ import Register from '../Screens/Register'
 import Setting from '../Screens/Setting'
 import Timings from '../Screens/Timings'
 import UserProfile from '../Screens/UserProfile'
+import Home from '../Screens/Home'
+import Login from '../Screens/Login'
 
 const Stack=createNativeStackNavigator()
 const Navigation = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName='Home'>
-            <Stack.Screen  name="Home"  component={UserDashboard}/>
-            <Stack.Screen  name="Aboutus"  component={AboutUs}/>
-            <Stack.Screen  name="Combos"  component={Combos}/>
-            <Stack.Screen  name="Contactus"  component={ContactUs}/>
-            <Stack.Screen  name="Location"  component={Location}/>
-            <Stack.Screen  name="Payment"  component={Payment}/>
-            <Stack.Screen  name="Register"  component={Register}/>
-            <Stack.Screen  name="Setting"  component={Setting}/>
-            <Stack.Screen  name="Timings"  component={Timings}/>
-            <Stack.Screen  name="profile"  component={UserProfile}/>
+        <Stack.Navigator initialRouteName=''>
+            <Stack.Screen options={{ headerShown: false }} name="Home"  component={Home}/>
+            <Stack.Screen options={{ headerShown: false }} name="AboutUs"  component={AboutUs}/>
+            <Stack.Screen options={{ headerShown: false }} name="Combos"  component={Combos}/>
+            <Stack.Screen options={{ headerShown: false }} name="ContactUs"  component={ContactUs}/>
+            <Stack.Screen options={{ headerShown: false }} name="Location"  component={Location}/>
+            <Stack.Screen options={{ headerShown: false }} name="Payment"  component={Payment}/>
+            <Stack.Screen options={{ headerShown: false }} name="Login"  component={Login}/>
+            <Stack.Screen options={{ headerShown: false }} name="Register"  component={Register}/>
+            <Stack.Screen options={{ headerShown: false }} name="Setting"  component={Setting}/>
+            <Stack.Screen options={{ headerShown: false }} name="Timings" component={Timings} />
+            <Stack.Screen options={{ headerShown: false }} name="profile"  component={UserProfile}/>
             
         </Stack.Navigator>
     </NavigationContainer>
