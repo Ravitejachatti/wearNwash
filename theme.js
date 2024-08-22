@@ -5,8 +5,9 @@ export const theme={
 
     },
     color:{
-        primary:'green',
-        secondary:'lightgreen'
+        primary:'#0860ab',
+        secondary:'#2495f5',
+        third:"#85c4f9"
 
     }
 

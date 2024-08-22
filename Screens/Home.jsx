@@ -1,11 +1,12 @@
 import React from 'react'
 import { View,Text,StyleSheet, TouchableOpacity, } from 'react-native'
 import { theme } from '../theme'
+import Header from '../Components/Header/Header'
 
-const UserDashboard = () => {
+const Home = () => {
   return (
     <View>
-        <View style={{display:'flex',height:600}} >
+        {/* <View style={{display:'flex',height:600}} >
             <View style={Styles.containerSlots}><Text>scroll</Text>
             </View>
             
@@ -14,7 +15,9 @@ const UserDashboard = () => {
             </TouchableOpacity>
             
             
-        </View>
+        </View> */}
+
+        <Header/>
       
     </View>
   )
@@ -41,4 +44,4 @@ const Styles=StyleSheet.create({
     }
 })
 
-export default UserDashboard
+export default Home

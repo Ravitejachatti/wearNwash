@@ -1,61 +1,45 @@
-import React, { useEffect } from 'react'
-import { View,Text,StyleSheet, TouchableOpacity, } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import { theme } from '../../theme'
-import { useDispatch, useSelector } from 'react-redux'
-import { getBasedOnLocation } from '../../Redux/App/action'
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import CustomBtn from "../../Custom/CustomBtn/CustomBtn";
 
 
 const Header = () => {
-
-
-const dispatch  = useDispatch()
-const store = useSelector(state=> state.app.centers.length);
-console.log("store",store);
-
-useEffect(()=>{
-  dispatch(getBasedOnLocation())
-  .then(res=>{
-    // console.log(res)
-  })
-},[])
-    
-
   return (
-    <View >
-        <View style={Styles.container}>
-        <Icon name="menu" color="white" size={30}/>
-        <Text style={Styles.containerText}>WearNWash</Text>
-       
+    <View style={Styles.main}>
+     
+      <View style={Styles.slotsContainer}>
+        <View style={Styles.slots}>
+          <Text>Slots here will be mapped</Text>
         </View>
-
-        {/* <Button> hare krishna</Button> */}    
+        <View >
+          <CustomBtn text="Book a slot" nav={"Timings"} width={"60%"} />
+        </View>
+      </View>
     </View>
-  )
-}
-const Styles=StyleSheet.create({
-    container:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:"space-between",
-        alignItems:'center',
-        paddingHorizontal:20,
-        borderWidth:1,
-        borderColor:'black',
-        height:120,
-        borderBottomLeftRadius:20,
-        borderBottomRightRadius:20,
-        backgroundColor:"green",
-        marginTop:30
-        
-    },
+  );
+};
+const Styles = StyleSheet.create({
+  main: {
+    height: "100%",
+   
+  },
+  
 
-    containerText:{
-        fontSize:25,
-        fontWeight:"600",
-        color:"white"
-        
-    }
-})
+  slotsContainer: {
+    display: "flex",
+    height: 500,
+    flex: 1,
+    padding: 5,
+  },
+  slots: {
+    // borderWidth: 1,
+    borderColor: "gray",
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
-export default Header
+});
+
+export default Header;
