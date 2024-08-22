@@ -26,6 +26,7 @@ const Styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     backgroundColor: "white",
     marginTop: 30,
+    
   },
   containerText: {
     fontSize: 30,
