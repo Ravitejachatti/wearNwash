@@ -12,7 +12,7 @@ const Header = () => {
           <Text>Slots here will be mapped</Text>
         </View>
         <View >
-          <CustomBtn text="Book a slot" nav={"Timings"} width={"60%"} />
+          <CustomBtn text="Book a slot" nav={"Location"} width={"60%"} />
         </View>
       </View>
     </View>

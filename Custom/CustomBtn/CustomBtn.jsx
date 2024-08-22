@@ -2,7 +2,7 @@ import React from 'react'
 import { View,Text,TouchableOpacity,StyleSheet } from 'react-native'
 import { theme } from '../../theme'
 import { useNavigation } from '@react-navigation/native'
-const CustomBtn = ({text, nav, width}) => {
+const CustomBtn = ({text, nav, disabled}) => {
     
     const navigation = useNavigation()
 
@@ -10,9 +10,9 @@ const CustomBtn = ({text, nav, width}) => {
 
     <View style={styles.btn}>
            <TouchableOpacity
+           disabled={disabled}
             onPress={()=>navigation.navigate(nav)}
            >
-           
             <Text style={{ fontSize: 22, textAlign: "center", color: "white" }}>
               {text}
             </Text>

@@ -4,7 +4,8 @@ import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Navigation from './Navigation/Navigation'; // Your Navigation setup
 import Navbar from './Components/Navbar/Navbar'; // Your Navbar component
-
+import { Provider } from 'react-redux';
+import { store } from './Redux/store';
 const App = () => {
   const [currentRouteName, setCurrentRouteName] = useState('');
 
@@ -12,7 +13,8 @@ const App = () => {
   const noNavBarPages = ['Login', 'Register'];
 
   return (
-    <NavigationContainer
+    <Provider store={store}>
+      <NavigationContainer
       onStateChange={(state) => {
         const routeName = state?.routes[state.index]?.name;
         setCurrentRouteName(routeName);
@@ -30,6 +32,7 @@ const App = () => {
         <Navigation />
       </View>
     </NavigationContainer>
+    </Provider>
   );
 };
 
