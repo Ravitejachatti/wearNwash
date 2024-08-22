@@ -13,10 +13,11 @@ const dispatch  = useDispatch()
 const store = useSelector(state=> state.app.centers.length);
 console.log("store",store);
 
+
 useEffect(()=>{
   dispatch(getBasedOnLocation())
   .then(res=>{
-    // console.log(res)
+    console.log(res)
   })
 },[])
     
