@@ -89,6 +89,7 @@ const Styles = StyleSheet.create({
     height: 180,
     borderRadius: 14,
     borderStyle: 'solid',
+    textAlign:"center"
   },
 
   cardContainer: {
