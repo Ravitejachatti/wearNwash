@@ -5,29 +5,38 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { theme } from '../theme';
 import { useNavigation } from '@react-navigation/native';
+import { postRegister } from '../Redux/Auth/action';
+import { useDispatch } from 'react-redux';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
-  number: Yup.string().required('Number is required'),
+  phone: Yup.string().matches(/^[0-9]+$/, "Phone number must be numeric").required('Phone is required'),
   password: Yup.string().min(6, 'Password too short').required('Password is required'),
-  gender: Yup.string().required('Gender is required')
+  gender: Yup.string().required('Gender is required'),
+  location: Yup.string().required('Location is required')
 });
 
 const Register = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const handleSubmit = (values) => {
-    console.log('formSubmit', values);
+    console.log("Form submission initiated with values:", values);
+
+    dispatch(postRegister(values))
+      .then((res) => {
+        console.log("Response received from server:", res);
+        // navigation.navigate("Home"); 
+      })
+      .catch((err) => {
+        console.log("Error occurred during registration:", err);
+      });
   };
 
-  const navigation = useNavigation()
-
-const handlePress=()=>{
-  handleSubmit();
-  navigation.navigate("Home")
-}
   return (
     <Formik
-      initialValues={{ name: '', email: '', number: '', password: '', gender: '' }}
+      initialValues={{ name: '', email: '', phone: '', password: '', gender: '', location: "" }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
@@ -43,6 +52,7 @@ const handlePress=()=>{
           {touched.name && errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
 
           <TextInput
+            keyboardType='email-address'
             style={styles.input}
             value={values.email}
             onChangeText={handleChange('email')}
@@ -52,13 +62,14 @@ const handlePress=()=>{
           {touched.email && errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 
           <TextInput
+            keyboardType='numeric'
             style={styles.input}
-            value={values.number}
-            onChangeText={handleChange('number')}
-            onBlur={handleBlur('number')}
-            placeholder='Number'
+            value={values.phone}
+            onChangeText={handleChange('phone')}
+            onBlur={handleBlur('phone')}
+            placeholder='Phone'
           />
-          {touched.number && errors.number && <Text style={styles.errorText}>{errors.number}</Text>}
+          {touched.phone && errors.phone && <Text style={styles.errorText}>{errors.phone}</Text>}
 
           <TextInput
             style={styles.input}
@@ -88,11 +99,36 @@ const handlePress=()=>{
                 placeholder: styles.placeholder,
               }}
             />
-            {touched.gender && errors.gender && <Text style={styles.errorText}>{errors.gender}</Text>}
           </View>
+          {touched.gender && errors.gender && <Text style={styles.errorText}>{errors.gender}</Text>}
+
+          <View style={styles.inputWrapper}>
+            <RNPickerSelect
+              onValueChange={(value) => setFieldValue('location', value)}
+              placeholder={{
+                label: 'Locations',
+                value: null,
+              }}
+              value={values.location}
+              items={[
+                { label: 'Location 1', value: 'location1' },
+                { label: 'Location 2', value: 'location2' },
+                { label: 'Location 3', value: 'location3' },
+                { label: 'Location 4', value: 'location4' },
+                { label: 'Location 5', value: 'location5' },
+                { label: 'Location 6', value: 'location6' },
+              ]}
+              style={{
+                inputIOS: styles.input,
+                inputAndroid: styles.inputSelect,
+                placeholder: styles.placeholder,
+              }}
+            />
+          </View>
+          {touched.location && errors.location && <Text style={styles.errorText}>{errors.location}</Text>}
 
           <View style={styles.btn}>
-            <TouchableOpacity onPress={handlePress}>
+            <TouchableOpacity onPress={handleSubmit}>
               <Text style={{ fontSize: 22, textAlign: 'center', color: 'white' }}>
                 Register
               </Text>
@@ -106,7 +142,8 @@ const handlePress=()=>{
 
 const styles = StyleSheet.create({
   inputContainer: {
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    marginTop: 60
   },
   input: {
     borderWidth: 1,
@@ -120,7 +157,8 @@ const styles = StyleSheet.create({
   inputWrapper: {
     borderWidth: 1,
     borderRadius: 15,
-    color: 'black'
+    color: 'black',
+    marginBottom: 10
   },
   inputSelect: {
     paddingVertical: 30,
@@ -131,7 +169,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     width: '60%',
-    marginHorizontal: 'auto',
+    alignSelf: 'center',
     backgroundColor: theme.color.secondary,
     marginVertical: 20
   },
