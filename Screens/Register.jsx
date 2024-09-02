@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Formik } from 'formik';
@@ -20,28 +20,38 @@ const validationSchema = Yup.object().shape({
 const Register = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const [errorMessage,setErrorMessage ] = useState("")
 
   const handleSubmit = (values) => {
     console.log("Form submission initiated with values:", values);
 
     dispatch(postRegister(values))
       .then((res) => {
-        console.log("Response received from server:", res);
-        // navigation.navigate("Home"); 
+        console.log("Res:", res);
+        
+        if(res?.message){
+             navigation.navigate("Login"); 
+        }
       })
       .catch((err) => {
-        console.log("Error occurred during registration:", err);
+        console.log("Error:", err);
+        if(err?.response?.data?.message ){
+          setErrorMessage(err?.response?.data?.message)
+        }
       });
   };
 
+  console.log("hare krishna")
   return (
     <Formik
       initialValues={{ name: '', email: '', phone: '', password: '', gender: '', location: "" }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
+     
       {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue }) => (
         <View style={styles.inputContainer}>
+           <Text style={{textAlign:"center", color:"red"}}>{errorMessage}</Text>
           <TextInput
             style={styles.input}
             value={values.name}
@@ -111,12 +121,17 @@ const Register = () => {
               }}
               value={values.location}
               items={[
-                { label: 'Location 1', value: 'location1' },
-                { label: 'Location 2', value: 'location2' },
-                { label: 'Location 3', value: 'location3' },
-                { label: 'Location 4', value: 'location4' },
-                { label: 'Location 5', value: 'location5' },
-                { label: 'Location 6', value: 'location6' },
+                { label: 'MHP-1', value: 'MHP-1' },
+                { label: 'MHP-2', value: 'MHP-2' },
+                { label: 'MHP-3', value: 'MHP-3' },
+                { label: 'AUB1-1', value: 'AUB1-1' },
+                { label: 'AUB1-2', value: 'AUB1-2' },
+                { label: 'AUB2-1', value: 'AUB2-1' },
+                { label: 'AUB2-3', value: 'AUB2-3' },
+                { label: 'SMT-1', value: 'SMT-1' },
+                { label: 'SMT-2', value: 'SMT-2' },
+                { label: 'MT-1', value: 'MT-1' },
+                { label: 'MMT-2', value: 'MMT-2' },
               ]}
               style={{
                 inputIOS: styles.input,
